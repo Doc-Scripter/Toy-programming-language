@@ -2,6 +2,7 @@ package lexer
 
 import (
 	"testing"
+    "ksm/token"
 )
 
 func TestNew(t *testing.T) {
@@ -54,6 +55,37 @@ func TestReadChar(t *testing.T) {
 		}
 		l.readChar()
 	}
+}
+
+func TestNextToken(t *testing.T) {
+    input := "=+(){},;"
+
+    tests := []struct {
+        expectedType token.TokenType
+        expectedLiteral string
+    }{
+        {token.ASSIGN, "="},
+        {token.PLUS,"+"},
+        {token.LPAREN, "("},
+        {token.RPAREN,")"},
+        {token.LBRACE,"{"},
+        {token.RBRACE,"}"},
+        {token.COMMA,","},
+        {token.SEMICOLON,";"},
+    }
+    l := New(input)
+
+    for i, tc := range tests {
+        tok := l.NextToken()
+
+        if tok.Type != tc.expectedType {
+            t.Fatalf("test[%d] - wrong tokentype. Expected=%q, got=%q", i, tc.expectedType, tok.Type)
+        }
+
+        if tok.Literal != tc.expectedLiteral {
+            t.Fatalf("test[%d] - wrong literal. Expected %q, got=%q", i, tc.expectedLiteral, tok.Literal)
+        }
+    }
 }
 
 // func TestReadNumber(t *testing.T){
