@@ -1,7 +1,5 @@
 package lexer
 
-
-
 import "ksm/token"
 
 type Lexer struct {

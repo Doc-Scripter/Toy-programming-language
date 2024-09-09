@@ -1,17 +1,19 @@
-package lexer
+package token
+
+type TokenType string
 
 // Token represents a token in the source code.
 type Token struct {
-	Type  string // A type for different token categories.
-	Value string
+	Type  TokenType // A type for different token categories.
+	Literal string
 }
 
-type Lexer struct {
-	input        string
-	position     int
-	readPosition int
-	ch           byte
-}
+// type Lexer struct {
+// 	input        string
+// 	position     int
+// 	readPosition int
+// 	ch           byte
+// }
 
 // Different token types
 const (
@@ -22,7 +24,8 @@ const (
 	// Identifiers and Literals:
 	IDENT = "IDENT" // Used for identifiers, such as variable names or functions
 	INT   = "INT"   // Represents integer literals: sequences of digits.
-
+    IDENTIFIER = "IDENTIFIER"
+	NUMBER     = "NUMBER"
 	// Operators:
 	ASSIGN   = "ASSIGN" // Assignment operator, used for assigning values to variables.
 	PLUS     = "PLUS"   // Used for adding numbers
@@ -65,4 +68,12 @@ var KeywordsMap = map[string]string{
 	"for":    FOR,
 	"true":   TRUE,
 	"false":  FALSE,
+}
+func LookupIdent(ident string) TokenType {
+	switch ident {
+	case "if":
+		return "IF"
+	default:
+		return IDENTIFIER
+	}
 }

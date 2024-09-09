@@ -1,6 +1,6 @@
-package parser
+package ast
 
-import "ksm/lexer"
+import "ksm/token"
 
 /*A parser is a sotware component that takes input data (requently text) and builds
 a data structure – oten some kind o parse tree, abstract syntax tree or other
@@ -33,14 +33,14 @@ func (p *Program) TokenLiteral() string {
 
 // represents a variable declaration(let x = 5)
 type LetStatement struct {
-	Token lexer.Token // The token.LET token
+	Token token.Token // The token.LET token
 	Name  *Identifier
 	Value Expression
 }
 
 // represents variable names
 type Identifier struct {
-	Token lexer.Token // The token.IDENT token
+	Token token.Token // The token.IDENT token
 	Value string
 }
 
@@ -52,7 +52,7 @@ type Expression interface {
 
 // represents interger values
 type IntegerLiteral struct {
-	Token lexer.Token // The token.INT token
+	Token token.Token // The token.INT token
 	Value int64
 }
 
