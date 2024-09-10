@@ -2,7 +2,8 @@ package lexer
 
 import (
 	"testing"
-    "ksm/token"
+
+	"ksm/token"
 )
 
 func TestNew(t *testing.T) {
@@ -20,7 +21,6 @@ func TestNew(t *testing.T) {
 		}
 
 	}
-
 }
 
 func TestReadChar(t *testing.T) {
@@ -44,7 +44,6 @@ func TestReadChar(t *testing.T) {
 
 	for i, expected := range expectedChars {
 		if l.ch != expected.expectedCh {
-
 			t.Fatalf("test[%d] - wrong char. expected= %q, got=%q", i, expected.expectedCh, l.ch)
 		}
 		if l.position != expected.expectedPos {
@@ -58,50 +57,83 @@ func TestReadChar(t *testing.T) {
 }
 
 func TestNextToken(t *testing.T) {
-    input := "=+(){},;"
+	input := "=+(){},;"
 
-    tests := []struct {
-        expectedType token.TokenType
-        expectedLiteral string
-    }{
-        {token.ASSIGN, "="},
-        {token.PLUS,"+"},
-        {token.LPAREN, "("},
-        {token.RPAREN,")"},
-        {token.LBRACE,"{"},
-        {token.RBRACE,"}"},
-        {token.COMMA,","},
-        {token.SEMICOLON,";"},
-    }
-    l := New(input)
+	tests := []struct {
+		expectedType    token.TokenType
+		expectedLiteral string
+	}{
+		{token.ASSIGN, "="},
+		{token.PLUS, "+"},
+		{token.LPAREN, "("},
+		{token.RPAREN, ")"},
+		{token.LBRACE, "{"},
+		{token.RBRACE, "}"},
+		{token.COMMA, ","},
+		{token.SEMICOLON, ";"},
+	}
+	l := New(input)
 
-    for i, tc := range tests {
-        tok := l.NextToken()
+	for i, tc := range tests {
+		tok := l.NextToken()
 
-        if tok.Type != tc.expectedType {
-            t.Fatalf("test[%d] - wrong tokentype. Expected=%q, got=%q", i, tc.expectedType, tok.Type)
-        }
+		if tok.Type != tc.expectedType {
+			t.Fatalf("test[%d] - wrong tokentype. Expected=%q, got=%q", i, tc.expectedType, tok.Type)
+		}
 
-        if tok.Literal != tc.expectedLiteral {
-            t.Fatalf("test[%d] - wrong literal. Expected %q, got=%q", i, tc.expectedLiteral, tok.Literal)
-        }
-    }
+		if tok.Literal != tc.expectedLiteral {
+			t.Fatalf("test[%d] - wrong literal. Expected %q, got=%q", i, tc.expectedLiteral, tok.Literal)
+		}
+	}
 }
 
-// func TestReadNumber(t *testing.T){
-//  	input:= `5;`
-// 	tests:=[]struct{
-// 		expectedType token.TokenType
-// 		expectedLiteral string
-// 	}{
-// 		{token.INT,"5"},
-// 	}
+func TestReadNumber(t *testing.T) {
+	input := `a51s`
+	lexer := New(input)
+lexer.readChar()
+	number := lexer.readNumber()
+	if number != "51" {
+		t.Errorf("Expected `5`, got %q", number)
+	}
+}
 
-// 	got:=readNumber(input)
-// 	for _,tt:=range tests{
-// 		if got!= tt.expectedLiteral{
-// 			t.Errorf("got: \n want : \n",got,tt.want)
-// 		}
-// 	}
+func TestIsletter(t *testing.T){
+	input:=[]struct{
+		byte
+		bool
 
-//  }
+	}{
+		{'h',true},
+		{'e',true},
+		{'y',true},
+		{'1',false},
+		{'2',false},
+		{'3',false},
+
+	}
+	for _,tt:=range input{
+		got:=isLetter(tt.byte)
+		if tt.bool!=got{
+			t.Errorf("got %v\n expected %v",got,tt.bool)
+		}
+	}
+}
+func TestIsDigit(t *testing.T){
+	input:=[]struct{
+		byte
+		bool
+	}{
+		{'1',true},
+		{'2',true},
+		{'3',true},
+		{'h',false},
+		{'#',false},
+		{'&',false},
+	}
+	for _,tt:=range input{
+		got:=isDigit(tt.byte)
+		if tt.bool!=got{
+			t.Errorf("got %v\n expected %v",got,tt.bool)
+		}
+	}
+}
