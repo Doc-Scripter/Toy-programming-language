@@ -66,15 +66,15 @@ Kisumu/
 │   ├── types.go               # Type definitions (number, string, boolean, etc.)
 │   └── methods.go             # Built-in methods for each type
 │
-├── documentation/             # Main command line entry point
-│   ├── Introduction.md         # Environment for storing variable bindings
-│   ├── tokens.md         # Environment for storing variable bindings
-│   ├── lexer.md         # Environment for storing variable bindings
-│   ├── parser.md         # Environment for storing variable bindings
-│   ├── ast.md         # Environment for storing variable bindings
-│   ├── interpratot.md         # Environment for storing variable bindings
-│   ├── repl.md         # Environment for storing variable bindings
-│   └── types.md              # Main Kisumu interpreter
+├── documentation/           # Documentation files
+│   ├── introduction.md
+│   ├── tokens.md
+│   ├── lexer.md
+│   ├── parser.md
+│   ├── ast.md
+│   ├── interpreter.md
+│   ├── repl.md
+│   └── types.md
 │
 ├── go.mod                    # Go module definition
 └── README.md                 # Project overview and instructions
@@ -84,7 +84,7 @@ Kisumu/
 To get started with the Kisumu Programming language:
 1. CLone the repository:
 ```
-git clone https://github.com/yourusername/kisumu.git
+git clone https://github.com/LuvDokta/Toy-programming-language.git
 cd kisumu
 ```
 2. Install dependancies using Go:
