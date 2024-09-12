@@ -107,7 +107,7 @@ print(greeting);
 
 ### Documnentation
 Use the list of links below to navigate the different chapters of the ksm toy programming language Documentation
-1. [Project Journal]()
+1. [Project Journal](/documentation/introduction.md)
 
 ### completed featers
 2. [Token Module for token defination and helper functions.]()
