@@ -110,14 +110,14 @@ Use the list of links below to navigate the different chapters of the ksm toy pr
 1. [Project Journal](/documentation/introduction.md)
 
 ### completed featers
-2. [Token Module for token defination and helper functions.]()
-3. [Lexer Module for constructing AST]()
-4. [Abstract Syntax Tree module for node definations]()
+2. [Token Module for token defination and helper functions.](/documentation/tokens.md)
+3. [Lexer Module for constructing AST](/documentation/lexer.md)
+4. [Abstract Syntax Tree module for node definations](/documentation/ast.md)
 
 ### Ongoing implementions
-5. [Interpreter module for evaluating AST]()
-6. [REPL (Read-Eval-Print Loop)]()
-7. [Ksm-specific data types]() 
+5. [Interpreter module for evaluating AST](/documentation/interpreter.md)
+6. [REPL (Read-Eval-Print Loop)](/documentation/repl.md)
+7. [Ksm-specific data types](/documentation/datatypes.md) 
 
 
 ## Contributing
