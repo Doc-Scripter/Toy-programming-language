@@ -66,6 +66,16 @@ Kisumu/
 │   ├── types.go               # Type definitions (number, string, boolean, etc.)
 │   └── methods.go             # Built-in methods for each type
 │
+├── documentation/             # Main command line entry point
+│   ├── Introduction.md         # Environment for storing variable bindings
+│   ├── tokens.md         # Environment for storing variable bindings
+│   ├── lexer.md         # Environment for storing variable bindings
+│   ├── parser.md         # Environment for storing variable bindings
+│   ├── ast.md         # Environment for storing variable bindings
+│   ├── interpratot.md         # Environment for storing variable bindings
+│   ├── repl.md         # Environment for storing variable bindings
+│   └── types.md              # Main Kisumu interpreter
+│
 ├── go.mod                    # Go module definition
 └── README.md                 # Project overview and instructions
 
@@ -97,7 +107,7 @@ print(greeting);
 
 ### Documnentation
 Use the list of links below to navigate the different chapters of the ksm toy programming language Documentation
-1. Introduction
+1. [Project Journal]()
 
 ### completed featers
 2. [Token Module for token defination and helper functions.]()
