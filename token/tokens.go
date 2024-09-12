@@ -23,9 +23,8 @@ const (
 
 	// Identifiers and Literals:
 	IDENT      = "IDENT" // Used for identifiers, such as variable names or functions
-	INT        = "INT"   // Represents integer literals: sequences of digits.
 	IDENTIFIER = "IDENTIFIER"
-	NUMBER     = "NUMBER"
+	NUMBER     = "NUMBER" // Represents integer literals: sequences of digits.
 	// Operators:
 	ASSIGN   = "ASSIGN" // Assignment operator, used for assigning values to variables.
 	PLUS     = "PLUS"   // Used for adding numbers
