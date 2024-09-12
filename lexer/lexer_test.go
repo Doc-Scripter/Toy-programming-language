@@ -87,6 +87,7 @@ func TestNextToken(t *testing.T) {
 	}
 }
 
+// Comprehensive test
 func TestNextToken1(t *testing.T) {
 	input := `var five = 5;
 	var ten = 10;
@@ -202,6 +203,30 @@ func TestNextToken1(t *testing.T) {
 	}
 }
 
+// Test skipWhiteSpace
+func TestSkipWhiteSpace(t *testing.T) {
+	tt := []struct {
+		input    string
+		expected string
+	}{
+		{"  \t\n my name is Godwin", "my name is Godwin"},
+		{"\t\n\r\nSomeText", "SomeText"},
+		{"text", "text"},
+		{"\t \n", ""},
+	}
+
+	for _, tc := range tt {
+		l := &Lexer{input: tc.input}
+		l.readChar() // Initinialize the first character
+		l.skipWhiteSpace()
+
+		rem := l.input[l.position:]
+
+		if rem != tc.expected {
+			t.Errorf("For input %q, expected= %q but got= %q", tc.input, tc.expected, rem)
+		}
+	}
+}
 func TestReadNumber(t *testing.T) {
 	input := `a51s`
 	lexer := New(input)
