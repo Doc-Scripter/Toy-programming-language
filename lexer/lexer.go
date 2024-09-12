@@ -28,7 +28,7 @@ func (l *Lexer) readChar() {
 func (l *Lexer) NextToken() token.Token {
 	var tok token.Token
 
-	l.skipWhitespace()
+	l.skipWhiteSpace()
 
 	switch l.ch {
 	case '=':
@@ -92,7 +92,7 @@ func (l *Lexer) NextToken() token.Token {
 	return tok
 }
 
-func (l *Lexer) skipWhitespace() {
+func (l *Lexer) skipWhiteSpace() {
 	for l.ch == ' ' || l.ch == '\t' || l.ch == '\n' || l.ch == '\r' {
 		l.readChar()
 	}
