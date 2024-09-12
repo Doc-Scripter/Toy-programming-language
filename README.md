@@ -30,7 +30,7 @@ Ksm is an interpreted Toy Programming language written in Golang.
     ______________________________________________
     ```
 
-## File Structure
+## File Structure pf the Complete langugae interpreter
 
 ```markdown
 Kisumu/
