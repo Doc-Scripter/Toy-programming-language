@@ -87,53 +87,167 @@ func TestNextToken(t *testing.T) {
 	}
 }
 
+func TestNextToken1(t *testing.T) {
+	input := `var five = 5;
+	var ten = 10;
+	
+	var add = func(x, y) {
+		x + y;
+	};
+	
+	var result = add(five, ten);
+	!-/*5;
+	5 < 10 > 5;
+
+	if (5 < 10) {
+		return true;
+	} else {
+		return false;
+	}
+
+	10 == 10
+	10 != 9;
+	`
+
+	tests := []struct {
+		expectedType    token.TokenType
+		expectedLiteral string
+	}{
+		{token.VAR, "var"},
+		{token.IDENTIFIER, "five"},
+		{token.ASSIGN, "="},
+		{token.NUMBER, "5"},
+		{token.SEMICOLON, ";"},
+		{token.VAR, "var"},
+		{token.IDENTIFIER, "ten"},
+		{token.ASSIGN, "="},
+		{token.NUMBER, "10"},
+		{token.SEMICOLON, ";"},
+		{token.VAR, "var"},
+		{token.IDENTIFIER, "add"},
+		{token.ASSIGN, "="},
+		{token.FUNCTION, "func"},
+		{token.LPAREN, "("},
+		{token.IDENTIFIER, "x"},
+		{token.COMMA, ","},
+		{token.IDENTIFIER, "y"},
+		{token.RPAREN, ")"},
+		{token.LBRACE, "{"},
+		{token.IDENTIFIER, "x"},
+		{token.PLUS, "+"},
+		{token.IDENTIFIER, "y"},
+		{token.SEMICOLON, ";"},
+		{token.RBRACE, "}"},
+		{token.SEMICOLON, ";"},
+		{token.VAR, "var"},
+		{token.IDENTIFIER, "result"},
+		{token.ASSIGN, "="},
+		{token.IDENTIFIER, "add"},
+		{token.LPAREN, "("},
+		{token.IDENTIFIER, "five"},
+		{token.COMMA, ","},
+		{token.IDENTIFIER, "ten"},
+		{token.RPAREN, ")"},
+		{token.SEMICOLON, ";"},
+		{token.BANG, "!"},
+		{token.MINUS, "-"},
+		{token.FSLASH, "/"},
+		{token.ASTERISK, "*"},
+		{token.NUMBER, "5"},
+		{token.SEMICOLON, ";"},
+		{token.NUMBER, "5"},
+		{token.LT, "<"},
+		{token.NUMBER, "10"},
+		{token.GT, ">"},
+		{token.NUMBER, "5"},
+		{token.SEMICOLON, ";"},
+		{token.IF, "if"},
+		{token.LPAREN, "("},
+		{token.NUMBER, "5"},
+		{token.LT, "<"},
+		{token.NUMBER, "10"},
+		{token.RPAREN, ")"},
+		{token.LBRACE, "{"},
+		{token.RETURN, "return"},
+		{token.TRUE, "true"},
+		{token.SEMICOLON, ";"},
+		{token.RBRACE, "}"},
+		{token.ELSE, "else"},
+		{token.LBRACE, "{"},
+		{token.RETURN, "return"},
+		{token.FALSE, "false"},
+		{token.SEMICOLON, ";"},
+		{token.RBRACE, "}"},
+		{token.NUMBER, "10"},
+		{token.EQ, "=="},
+		{token.NUMBER, "10"},
+		{token.SEMICOLON, ";"},
+		{token.NUMBER, "10"},
+		{token.NOT_EQ, "!="},
+		{token.NUMBER, "9"},
+		{token.SEMICOLON, ";"},
+	}
+	l := New(input)
+
+	for i, tc := range tests {
+		tok := l.NextToken()
+
+		if tok.Type != tc.expectedType {
+			t.Fatalf("test[%d] Failed - token type wrong. Expected = %q, got = %q", i, tc.expectedType, tok.Type)
+		}
+
+		if tok.Literal != tc.expectedLiteral {
+			t.Fatalf("test[%d] Failed - token literal wrong. Expected= %q, got= %q", i, tc.expectedLiteral, tok.Literal)
+		}
+	}
+}
+
 func TestReadNumber(t *testing.T) {
 	input := `a51s`
 	lexer := New(input)
-lexer.readChar()
+	lexer.readChar()
 	number := lexer.readNumber()
 	if number != "51" {
 		t.Errorf("Expected `5`, got %q", number)
 	}
 }
 
-func TestIsletter(t *testing.T){
-	input:=[]struct{
+func TestIsletter(t *testing.T) {
+	input := []struct {
 		byte
 		bool
-
 	}{
-		{'h',true},
-		{'e',true},
-		{'y',true},
-		{'1',false},
-		{'2',false},
-		{'3',false},
-
+		{'h', true},
+		{'e', true},
+		{'y', true},
+		{'1', false},
+		{'2', false},
+		{'3', false},
 	}
-	for _,tt:=range input{
-		got:=isLetter(tt.byte)
-		if tt.bool!=got{
-			t.Errorf("got %v\n expected %v",got,tt.bool)
+	for _, tt := range input {
+		got := isLetter(tt.byte)
+		if tt.bool != got {
+			t.Errorf("got %v\n expected %v", got, tt.bool)
 		}
 	}
 }
-func TestIsDigit(t *testing.T){
-	input:=[]struct{
+
+func TestIsDigit(t *testing.T) {
+	input := []struct {
 		byte
 		bool
 	}{
-		{'1',true},
-		{'2',true},
-		{'3',true},
-		{'h',false},
-		{'#',false},
-		{'&',false},
+		{'1', true},
+		{'2', true},
+		{'3', true},
+		{'h', false},
+		{'#', false},
+		{'&', false},
 	}
-	for _,tt:=range input{
-		got:=isDigit(tt.byte)
-		if tt.bool!=got{
-			t.Errorf("got %v\n expected %v",got,tt.bool)
+	for _, tt := range input {
+		got := isDigit(tt.byte)
+		if tt.bool != got {
+			t.Errorf("got %v\n expected %v", got, tt.bool)
 		}
 	}
 }

@@ -4,7 +4,7 @@ type TokenType string
 
 // Token represents a token in the source code.
 type Token struct {
-	Type  TokenType // A type for different token categories.
+	Type    TokenType // A type for different token categories.
 	Literal string
 }
 
@@ -22,9 +22,9 @@ const (
 	EOF     = "EOF"     // "End of file" - Indicates the lexer has reached the end of the input
 
 	// Identifiers and Literals:
-	IDENT = "IDENT" // Used for identifiers, such as variable names or functions
-	INT   = "INT"   // Represents integer literals: sequences of digits.
-    IDENTIFIER = "IDENTIFIER"
+	IDENT      = "IDENT" // Used for identifiers, such as variable names or functions
+	INT        = "INT"   // Represents integer literals: sequences of digits.
+	IDENTIFIER = "IDENTIFIER"
 	NUMBER     = "NUMBER"
 	// Operators:
 	ASSIGN   = "ASSIGN" // Assignment operator, used for assigning values to variables.
@@ -32,6 +32,7 @@ const (
 	MINUS    = "-"
 	BANG     = "!"
 	ASTERISK = "*"
+	FSLASH   = "/"
 
 	// Comparison Operators;
 	EQ     = "=="
@@ -59,7 +60,7 @@ const (
 )
 
 // Maps keywords strings to their respective token types
-var KeywordsMap = map[string]string{
+var KeywordsMap = map[string]TokenType{
 	"func":   FUNCTION,
 	"var":    VAR,
 	"if":     IF,
@@ -69,11 +70,10 @@ var KeywordsMap = map[string]string{
 	"true":   TRUE,
 	"false":  FALSE,
 }
+
 func LookupIdent(ident string) TokenType {
-	switch ident {
-	case "if":
-		return "IF"
-	default:
-		return IDENTIFIER
+	if tok, ok := KeywordsMap[ident]; ok {
+		return tok
 	}
+	return IDENTIFIER
 }
