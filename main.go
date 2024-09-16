@@ -18,5 +18,4 @@ func main() {
 	fmt.Printf("Hello %s! This the Ksm Toy Programming language!\n", user.Username)
 	fmt.Println()
 	repl.StartRepl(os.Stdin, os.Stdout)
-	// fmt.Println(lexer.New("Hello"))
 }
