@@ -1,7 +1,5 @@
 package parser
 
-
-
 import (
 	"ksm/ast"
 	"ksm/lexer"
