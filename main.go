@@ -3,9 +3,18 @@ package main
 import (
 	"fmt"
 	"ksm/lexer"
+	"ksm/token"
 )
 
 func main() {
-	l := lexer.New("Hello")
-	fmt.Println(l)
+	input := "1 = 1"
+	l := lexer.New(input)
+
+	for {
+		tok := l.NextToken()
+		fmt.Printf("%+v\n", tok)
+		if tok.Type == token.EOF {
+			break
+		}
+	}
 }
