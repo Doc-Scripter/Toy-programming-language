@@ -2,19 +2,21 @@ package main
 
 import (
 	"fmt"
-	"ksm/lexer"
-	"ksm/token"
+	"log"
+	"os"
+	"os/user"
+
+	"ksm/repl"
 )
 
 func main() {
-	input := "1 = 1"
-	l := lexer.New(input)
-
-	for {
-		tok := l.NextToken()
-		fmt.Printf("%+v\n", tok)
-		if tok.Type == token.EOF {
-			break
-		}
+	user, err := user.Current()
+	if err != nil {
+		log.Fatal("Error: ", err)
 	}
+
+	fmt.Printf("Hello %s! This the Ksm Toy Programming language!\n", user.Username)
+	fmt.Println()
+	repl.StartRepl(os.Stdin, os.Stdout)
+	// fmt.Println(lexer.New("Hello"))
 }
