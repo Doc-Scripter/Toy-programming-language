@@ -3,14 +3,13 @@ package repl
 import (
 	"bufio"
 	"fmt"
-	
 	"io"
 
 	"ksm/lexer"
 	"ksm/token"
 )
 
-const REPL_PROMPT = "Enter Input: "
+const REPL_PROMPT = "\033[32mEnter Input:\033[0m "
 
 func StartRepl(input io.Reader, output io.Writer) {
 	scanner := bufio.NewScanner(input)
@@ -30,5 +29,6 @@ func StartRepl(input io.Reader, output io.Writer) {
 		for tok := L.NextToken(); tok.Type != token.EOF; tok = L.NextToken() {
 			fmt.Printf("%+v\n", tok)
 		}
+		fmt.Println()
 	}
 }
