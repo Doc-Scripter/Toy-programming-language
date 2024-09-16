@@ -203,7 +203,7 @@ func TestNextToken1(t *testing.T) {
 	}
 }
 
-// Test skipWhiteSpace
+// Test for skipWhiteSpace method
 func TestSkipWhiteSpace(t *testing.T) {
 	tt := []struct {
 		input    string
@@ -227,6 +227,8 @@ func TestSkipWhiteSpace(t *testing.T) {
 		}
 	}
 }
+
+// Test for readNumber() method
 func TestReadNumber(t *testing.T) {
 	input := `a51s`
 	lexer := New(input)
