@@ -105,7 +105,7 @@ func TestNextToken1(t *testing.T) {
 		return false;
 	}
 
-	10 == 10
+	10 == 10;
 	10 != 9;
 	`
 
