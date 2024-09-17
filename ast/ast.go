@@ -20,7 +20,7 @@ type Program struct {
 // interface representing a statement
 type Statement interface {
 	Node
-	StatementNode()
+	statementNode()
 }
 
 func (p *Program) TokenLiteral() string {
@@ -31,9 +31,9 @@ func (p *Program) TokenLiteral() string {
 	}
 }
 
-// represents a variable declaration(let x = 5)
-type LetStatement struct {
-	Token token.Token // The token.LET token
+// represents a variable declaration(var x = 5)
+type VarStatement struct {
+	Token token.Token // The token.VAR token
 	Name  *Identifier
 	Value Expression
 }
@@ -44,10 +44,13 @@ type Identifier struct {
 	Value string
 }
 
+func (i *Identifier) expressionNode()      {}
+func (i *Identifier) TokenLiteral() string { return i.Token.Literal }
+
 // is an interface for all expressions
 type Expression interface {
 	Node
-	ExpressionNode()
+	expressionNode()
 }
 
 // represents interger values
@@ -56,5 +59,5 @@ type IntegerLiteral struct {
 	Value int64
 }
 
-func (ls *LetStatement) statementNode()       {}
-func (ls *LetStatement) TokenLiteral() string { return ls.Token.Literal }
+func (ls *VarStatement) statementNode()       {}
+func (ls *VarStatement) TokenLiteral() string { return ls.Token.Literal }
