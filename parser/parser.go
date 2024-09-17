@@ -31,6 +31,7 @@ func (p *Parser) nextToken() {
 	p.peekToken = p.l.NextToken()
 }
 
+// ()ParseProgram() constructs the root node of the AST, an `*ast.Program`.  
 func (p *Parser) ParseProgram() *ast.Program {
 	program := &ast.Program{}
 	program.Statements = []ast.Statement{}
@@ -46,7 +47,53 @@ func (p *Parser) ParseProgram() *ast.Program {
 	return program
 }
 
+// () parseStatement () parses a statement
 func (p *Parser) parseStatement() ast.Statement {
-	// Implement parsing of statements
-	return nil
+	switch p.curToken.Type {
+	case token.VAR:
+		return p.parseVarStatement()
+	default:
+		return nil
+	}
+}
+
+// 
+func (p *Parser) parseVarStatement() *ast.VarStatement {
+	stmt := &ast.VarStatement{Token: p.curToken}
+
+	if !p.expectedPeek(token.IDENTIFIER) {
+		return nil
+	}
+
+	stmt.Name = &ast.Identifier{Token: p.curToken, Value: p.curToken.Literal}
+
+	if !p.expectedPeek(token.ASSIGN) {
+		return nil
+	}
+
+	// TODO: we're skipping the expressions until
+	// encounter a semicolon
+
+	for !p.curTokenIs(token.SEMICOLON) {
+		p.nextToken()
+	}
+
+	return stmt
+}
+
+func (p *Parser) curTokenIs(t token.TokenType) bool {
+	return p.curToken.Type == t
+}
+
+func (p *Parser) peekTokenIS (t token.TokenType) bool {
+	return p.peekToken.Type == t
+}
+
+func (p *Parser) expectedPeek (t token.TokenType) bool {
+	if p.peekTokenIS(t) {
+		p.nextToken()
+		return true
+	} else {
+		return false
+	}
 }

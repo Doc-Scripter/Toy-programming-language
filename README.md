@@ -66,15 +66,15 @@ Kisumu/
 │   ├── types.go               # Type definitions (number, string, boolean, etc.)
 │   └── methods.go             # Built-in methods for each type
 │
-├── documentation/             # Main command line entry point
-│   ├── Introduction.md         # Environment for storing variable bindings
-│   ├── tokens.md         # Environment for storing variable bindings
-│   ├── lexer.md         # Environment for storing variable bindings
-│   ├── parser.md         # Environment for storing variable bindings
-│   ├── ast.md         # Environment for storing variable bindings
-│   ├── interpratot.md         # Environment for storing variable bindings
-│   ├── repl.md         # Environment for storing variable bindings
-│   └── types.md              # Main Kisumu interpreter
+├── documentation/           # Documentation files
+│   ├── introduction.md
+│   ├── tokens.md
+│   ├── lexer.md
+│   ├── parser.md
+│   ├── ast.md
+│   ├── interpreter.md
+│   ├── repl.md
+│   └── types.md
 │
 ├── go.mod                    # Go module definition
 └── README.md                 # Project overview and instructions
@@ -84,7 +84,7 @@ Kisumu/
 To get started with the Kisumu Programming language:
 1. CLone the repository:
 ```
-git clone https://github.com/yourusername/kisumu.git
+git clone https://github.com/LuvDokta/Toy-programming-language.git
 cd kisumu
 ```
 2. Install dependancies using Go:
@@ -110,24 +110,24 @@ Use the list of links below to navigate the different chapters of the ksm toy pr
 1. [Project Journal](/documentation/introduction.md)
 
 ### completed featers
-2. [Token Module for token defination and helper functions.]()
-3. [Lexer Module for constructing AST]()
-4. [Abstract Syntax Tree module for node definations]()
+2. [Token Module for token defination and helper functions.](/documentation/tokens.md)
+3. [Lexer Module for constructing AST](/documentation/lexer.md)
+4. [Abstract Syntax Tree module for node definations](/documentation/ast.md)
 
 ### Ongoing implementions
-5. [Interpreter module for evaluating AST]()
-6. [REPL (Read-Eval-Print Loop)]()
-7. [Ksm-specific data types]() 
+5. [Interpreter module for evaluating AST](/documentation/interpreter.md)
+6. [REPL (Read-Eval-Print Loop)](/documentation/repl.md)
+7. [Ksm-specific data types](/documentation/datatypes.md) 
 
 
 ## Contributing
 Contributions are welcome! Feel free to submit issues  or pull requests to improve the language.
 
 ## Authors
-1. [Stephen Odhiambo]()
-2. [Clifford Otieno]()
-3. [Ouma Godwin]()
-4. [Anne Okingo]()
+1. [Stephen Odhiambo](https://github.com/steodhiambo)
+2. [Clifford Otieno](https://github.com/LuvDokta)
+3. [Ouma Godwin](https://github.com/garveyshah)
+4. [Anne Okingo](https://github.com/Anne-Okingo)
 
 ## LIcense
 This Project is licensed under the MIT License-see the LICENSE file for details.
