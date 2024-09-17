@@ -22,7 +22,6 @@ const (
 	EOF     = "EOF"     // "End of file" - Indicates the lexer has reached the end of the input
 
 	// Identifiers and Literals:
-	IDENT      = "IDENT" // Used for identifiers, such as variable names or functions
 	IDENTIFIER = "IDENTIFIER"
 	NUMBER     = "NUMBER" // Represents integer literals: sequences of digits.
 	// Operators:
