@@ -51,9 +51,20 @@ type Expression interface {
 }
 
 // represents interger values
-type IntegerLiteral struct {
-	Token token.Token // The token.INT token
-	Value int64
+// type IntegerLiteral struct {
+// 	Token token.Token // The token.INT token
+// 	Value int64
+// }
+
+type BinaryExpression struct {
+	Left     Expression
+	Operator string
+	Right    Expression
+}
+
+type AssignmentStatement struct {
+	Name  string
+	Value Expression
 }
 
 func (ls *LetStatement) statementNode()       {}
