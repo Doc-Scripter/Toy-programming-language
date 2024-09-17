@@ -124,10 +124,10 @@ Use the list of links below to navigate the different chapters of the ksm toy pr
 Contributions are welcome! Feel free to submit issues  or pull requests to improve the language.
 
 ## Authors
-1. [Stephen Odhiambo]()
-2. [Clifford Otieno]()
-3. [Ouma Godwin]()
-4. [Anne Okingo]()
+1. [Stephen Odhiambo](https://github.com/steodhiambo)
+2. [Clifford Otieno](https://github.com/LuvDokta)
+3. [Ouma Godwin](https://github.com/garveyshah)
+4. [Anne Okingo](https://github.com/Anne-Okingo)
 
 ## LIcense
 This Project is licensed under the MIT License-see the LICENSE file for details.
