@@ -52,6 +52,11 @@ func testVarStatement(t *testing.T, s ast.Statement, name string) bool {
 		t.Errorf("s not *ast.LetStatement. got= %T", s)
 		return false
 	}
+
+	if varStmt.Name == nil {
+		t.Errorf("varStmt.Name is nil")
+		return false
+	}
 	if varStmt.Name.Value != name {
 		t.Errorf("letStmt.Name.Value ot '%s'. got= %s", name, varStmt.Name.Value)
 		return false
