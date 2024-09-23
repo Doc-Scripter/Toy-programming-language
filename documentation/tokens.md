@@ -161,4 +161,4 @@ The `Token` structure, along with the predefined token types, ensures that that 
 
 [Back to Main Page](../README.md#documnentation)
 
-[Move to Package Lexer](/documentation/lexer.md#overview)
+[Move to Package Lexer](/documentation/lexer.md)
