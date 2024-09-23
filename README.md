@@ -111,12 +111,16 @@ Use the list of links below to navigate the different chapters of the ksm toy pr
 
 ### completed featers
 2. [Token Module for token defination and helper functions.](/documentation/tokens.md)
+
 3. [Lexer Module for constructing AST](/documentation/lexer.md)
-4. [Abstract Syntax Tree module for node definations](/documentation/ast.md)
+
+4. [REPL (Read-Eval-Print Loop)](/documentation/repl.md)
+
+5. [Abstract Syntax Tree module for node definations](/documentation/ast.md)
 
 ### Ongoing implementions
-5. [Interpreter module for evaluating AST](/documentation/interpreter.md)
-6. [REPL (Read-Eval-Print Loop)](/documentation/repl.md)
+6. [Interpreter module for evaluating AST](/documentation/interpreter.md)
+
 7. [Ksm-specific data types](/documentation/datatypes.md) 
 
 
@@ -130,4 +134,4 @@ Contributions are welcome! Feel free to submit issues  or pull requests to impro
 4. [Anne Okingo](https://github.com/Anne-Okingo)
 
 ## LIcense
-This Project is licensed under the MIT License-see the LICENSE file for details.
+This Project is licensed under the MIT License-see the [LICENSE](/LICENSE) file for details.
