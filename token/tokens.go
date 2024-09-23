@@ -8,12 +8,6 @@ type Token struct {
 	Literal string
 }
 
-// type Lexer struct {
-// 	input        string
-// 	position     int
-// 	readPosition int
-// 	ch           byte
-// }
 
 // Different token types
 const (
@@ -69,6 +63,7 @@ var KeywordsMap = map[string]TokenType{
 	"false":  FALSE,
 }
 
+// Used by the lexer to determine if an identifier is a keyword or a variable
 func LookupIdent(ident string) TokenType {
 	if tok, ok := KeywordsMap[ident]; ok {
 		return tok
