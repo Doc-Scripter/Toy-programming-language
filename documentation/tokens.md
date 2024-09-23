@@ -158,3 +158,7 @@ into the following tokens:
 The `token` package is a foundational part of the lexer and parser. It defines various token types, which represent different components of the source coe, such as operaors, keywords, literals, and delimiters. It also provides a looup mechanism for keywords, allowing the lexer to differentiate between user-defined identifiers and reserved keywords.
 
 The `Token` structure, along with the predefined token types, ensures that that the lexer can effectively categorize the input into meaningful components, which the parser can use to build the Abstract Syntax Tree(AST).
+
+[Back to Main Page](../README.md#documnentation)
+
+[Move to Package Lexer](/documentation/lexer.md#overview)
