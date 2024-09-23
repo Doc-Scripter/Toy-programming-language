@@ -2,9 +2,9 @@ package ast
 
 import "ksm/token"
 
-/*A parser is a sotware component that takes input data (requently text) and builds
-a data structure – oten some kind o parse tree, abstract syntax tree or other
-hierarchical structure – giving a structural representation o the input, checking or
+/*A parser is a software component that takes input data (frequently text) and builds
+a data structure – often some kind of parse tree, abstract syntax tree or other
+hierarchical structure – giving a structural representation of the input, checking or
 correct syntax in the process. */
 
 // common interface for all AST nodes.

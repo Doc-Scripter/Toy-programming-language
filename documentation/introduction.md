@@ -56,4 +56,12 @@ Ksm is an interpreted toy programming language written in Go. The design draws i
     + Testing different cases(valid and invalid code) will help in catching issues early, 
     + Lexer tests are already in place.
 
+## Usefull Blogs and books
++ [pratt Parsing - .Dev](https://dev.to/jrop/pratt-parsing)
+
++ [pratt Parsing - matklad](https://matklad.github.io/2020/04/13/simple-but-powerful-pratt-parsing.html)
+
++ [pratt Parsing - chidi williams](https://chidiwilliams.com/posts/on-recursive-descent-and-pratt-parsing)
+
+
 Click [here](../README.md#documnentation) to naviagate back to the [homepage](../README.md#documnentation)
