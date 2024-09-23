@@ -3,7 +3,7 @@
 ## Overview
 The `lexer` package is responsible for breaking down the input source code into tokens that can be used by the parser to create an Abstract Syntax Tree(AST). This process is also known as lexical analysis or tokenization.
 
-The `Lexer` reads throughn the input string one character at a time and outputs individual tokens. Each token represents a meaningful component of the source code, such as an identifier, a keyword, or an operator.
+The `Lexer` reads through the input string one character at a time and outputs individual tokens. Each token represents a meaningful component of the source code, such as an identifier, a keyword, or an operator.
 
 ## `Lexer` Structure
 ```go
@@ -17,7 +17,7 @@ The `Lexer` reads throughn the input string one character at a time and outputs 
 
 + `input`: The string of source code being tokenized.
 + `position`: The index of the current character in the input string.
-+ `readposition`: THe index of the next character in the input string.
++ `readposition`: The index of the next character in the input string.
 + `ch`: The current character being evaluated.
 
 ## Lexer Functions
@@ -42,9 +42,9 @@ func (l *Lexer) readChar()
 
 3. `NextToken() token.Token`
 ```go 
-func (l *Lexeer) NextToken() token.Token
+func (l *Lexer) NextToken() token.Token
 ```
-This function is the core of the lexer, responsible for returning thenext token from the input. The lexer skips any whitespace before examining the current character (`ch`) and determines what type of token to produce based on the character.
+This function is the core of the lexer, responsible for returning the next token from the input. The lexer skips any whitespace before examining the current character (`ch`) and determines what type of token to produce based on the character.
 
 #### Token Types Handled:
 + **Operators & Symbol:**
@@ -95,7 +95,7 @@ numValue := l.readNumber() // returns "10"
 ```go
 (l *Lexer) peekChar() byte
 ```
-```peekChar` allows the lexer to look ahead one character without advancing the `position` or `readPosition`. It is used to identify two-character tokens like `==` and `!=`.
+`peekChar` allows the lexer to look ahead one character without advancing the `position` or `readPosition`. It is used to identify two-character tokens like `==` and `!=`.
 
 #### Example Usage:
 ```go
@@ -107,7 +107,7 @@ if l.peekChar() == '=' {
 ```go 
 func newToken(tokenType token.tokenType, ch byte) token.Token
 ```
-A helper function that constructs and returns a `Thoken` struct given the token type and its literal character value.
+A helper function that constructs and returns a `Token` struct given the token type and its literal character value.
 
 #### Example Usage:
 ```go
@@ -149,7 +149,7 @@ func main() {
 ```
 
 ## Conclusion
-The `lexer` package is responsible for converting a raw inpput string into a series of meaningful tokens that can be used by the parser to construct the Abstract Syntax Tree(AST). The lexer can handle various symbols, keywords, and identifiers as it scans the input character by character, skipping over whitespaces and identifying multi-character token such as `==` and `i=`.
+The `lexer` package is responsible for converting a raw input string into a series of meaningful tokens that can be used by the parser to construct the Abstract Syntax Tree(AST). The lexer can handle various symbols, keywords, and identifiers as it scans the input character by character, skipping over whitespaces and identifying multi-character token such as `==` and `i=`.
 
 [Back to main page](../README.md#documnentation)
 
