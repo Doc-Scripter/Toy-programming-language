@@ -1,3 +1,12 @@
+- [Overview](#overview)
+- [SymbolTable Struct](#symboltable-struct)
+- [Methods](#methods)
+  - [1.NewSymbolTable](#1newsymboltable)
+  - [2.Set](#2set)
+  - [3.Get](#3get)
+  - [4.Remove](#4remove)
+- [Conclusion](#conclusion)
+
 # Overview
 The runtime file defines a symbol table which facilitates variable storage and retrieval allowing for nested scopes through parent references
 
@@ -98,5 +107,5 @@ func main() {
 
 ```
 
-Conclusion
+# Conclusion
 Using the Symboltable struct allows for efficient management and supports nested scopes through parent-child relationships
