@@ -75,7 +75,7 @@ Kisumu/
 │   ├── interpreter.md
 │   ├── repl.md
 │   ├── types.md
-|   └──runtime.md
+|   └── runtime.md
 │
 ├── go.mod                    # Go module definition
 └── README.md                 # Project overview and instructions
