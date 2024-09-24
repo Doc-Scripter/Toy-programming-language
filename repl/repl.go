@@ -15,7 +15,7 @@ func StartRepl(input io.Reader, output io.Writer) {
 	scanner := bufio.NewScanner(input)
 
 	for {
-		fmt.Printf(REPL_PROMPT)
+		fmt.Println(REPL_PROMPT)
 
 		scanned := scanner.Scan()
 		// if it encounters the end of the input or an error.

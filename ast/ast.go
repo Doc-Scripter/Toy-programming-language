@@ -2,9 +2,9 @@ package ast
 
 import "ksm/token"
 
-/*A parser is a software component that takes input data (frequently text) and builds
-a data structure – often some kind of parse tree, abstract syntax tree or other
-hierarchical structure – giving a structural representation of the input, checking or
+/*A parser is a sotware component that takes input data (requently text) and builds
+a data structure – oten some kind o parse tree, abstract syntax tree or other
+hierarchical structure – giving a structural representation o the input, checking or
 correct syntax in the process. */
 
 // common interface for all AST nodes.
@@ -17,6 +17,12 @@ type Program struct {
 	Statements []Statement
 }
 
+// interface representing a statement
+type Statement interface {
+	Node
+	StatementNode()
+}
+
 func (p *Program) TokenLiteral() string {
 	if len(p.Statements) > 0 {
 		return p.Statements[0].TokenLiteral()
@@ -25,23 +31,16 @@ func (p *Program) TokenLiteral() string {
 	}
 }
 
-// interface representing a statement
-type Statement interface {
-	Node
-	statementNode()
-}
-
-// is an interface for all expressions
-type Expression interface {
-	Node
-	expressionNode()
-}
-
 // represents a variable declaration(var x = 5)
 type VarStatement struct {
 	Token token.Token // The token.VAR token
 	Name  *Identifier
 	Value Expression
+}
+
+// StatementNode implements Statement.
+func (vs *VarStatement) StatementNode() {
+	panic("unimplemented")
 }
 
 func (vs *VarStatement) statementNode() {}
@@ -58,7 +57,7 @@ type Identifier struct {
 	Value string
 }
 
-func (i *Identifier) expressionNode() {}
+func (i *Identifier) ExpressionNode() {}
 func (i *Identifier) TokenLiteral() string {
 	if i.Token.Literal == "" {
 		return "nil"
@@ -66,16 +65,56 @@ func (i *Identifier) TokenLiteral() string {
 	return i.Token.Literal
 }
 
+type AssignStatement struct {
+	Token token.Token // the token.ASSIGN token
+	Name  *Identifier
+	Value Expression
+}
+
+func (as *AssignStatement) statementNode()       {}
+func (as *AssignStatement) TokenLiteral() string { return as.Token.Literal }
+
+type StringLiteral struct {
+	Token token.Token // the token.STRING token
+	Value string
+}
+type Boolean struct {
+	Token token.Token // the token.BOOL token
+	Value bool
+}
+
+func (b *Boolean) expressionNode()      {}
+func (b *Boolean) TokenLiteral() string { return b.Token.Literal }
+
+func (sl *StringLiteral) expressionNode()      {}
+func (sl *StringLiteral) TokenLiteral() string { return sl.Token.Literal }
+
+// is an interface for all expressions
+type Expression interface {
+	Node
+	ExpressionNode()
+}
+
 // represents interger values
-// type IntegerLiteral struct {
-// 	Token token.Token // The token.INT token
-// 	Value int64
-// }
+type IntegerLiteral struct {
+	Token token.Token // The token.INT token
+	Value int64
+}
+
+func (il *IntegerLiteral) ExpressionNode() {}
+func (il *IntegerLiteral) TokenLiteral() string {
+	return il.Token.Literal
+}
 
 type BinaryExpression struct {
 	Left     Expression
 	Operator string
 	Right    Expression
+}
+
+func (be *BinaryExpression) ExpressionNode() {}
+func (be *BinaryExpression) TokenLiteral() string {
+	return be.Operator
 }
 
 type AssignmentStatement struct {

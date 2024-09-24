@@ -38,7 +38,7 @@ func (p *Parser) ParseProgram() *ast.Program {
 	program.Statements = []ast.Statement{}
 
 	for p.curToken.Type != token.EOF {
-		stmt := p.parseStatement()
+		stmt := p.parseVarStatement()
 		if stmt != nil {
 			program.Statements = append(program.Statements, stmt)
 		}
@@ -48,17 +48,17 @@ func (p *Parser) ParseProgram() *ast.Program {
 	return program
 }
 
-// () parseStatement () parses a statement
-func (p *Parser) parseStatement() ast.Statement {
+func (p *Parser) parseStatement() *ast.Statement {
 	switch p.curToken.Type {
 	case token.VAR:
-		return p.parseVarStatement()
+		return p.parseStatement()
 	default:
 		return nil
 	}
 }
 
 // 
+// () parseStatement () parses a statement
 func (p *Parser) parseVarStatement() *ast.VarStatement {
 	stmt := &ast.VarStatement{Token: p.curToken}
 
