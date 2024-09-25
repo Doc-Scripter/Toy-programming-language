@@ -8,15 +8,16 @@ import (
 )
 
 func TestLetStatements(t *testing.T) {
-	input := `var x = 5;
-	var y = 10;
-	var foobar = 909090;`
-	// var type = "string" 
+	input := `var  x  5;
+	var  = 10;
+	var 909090;`
+	// var type = "string"
 
 	l := lexer.New(input)
 	p := New(l)
 
 	program := p.ParseProgram()
+	checkParserErrors(t, p)
 	if program == nil {
 		t.Fatal("ParseProgram() returned nil")
 	}
@@ -66,4 +67,18 @@ func testVarStatement(t *testing.T, s ast.Statement, name string) bool {
 		return false
 	}
 	return true
+}
+
+func checkParserErrors(t *testing.T, p *Parser) {
+	errors := p.Errors()
+
+	if len(errors) == 0 {
+		return
+	}
+
+	t.Errorf("parser has %d errors", len(errors))
+	for _, msg := range errors {
+		t.Errorf("parser error: %q", msg)
+	}
+	t.FailNow()
 }
