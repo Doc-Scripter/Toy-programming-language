@@ -36,35 +36,48 @@ func (st *SymbolTable) Remove(name string) {
 }
 
 // func main() {
-// 	global := NewSumbolTable(nil) // intial scope
-// 	global.Set("x", 10)
+// 	global := NewSymbolTable(nil) // intial scope
+// 	// global.Set("x", 10)
+// child:=NewSymbolTable(global)
+// 	// value, found := global.Get("x")
+// 	// if found {
+// 	// 	fmt.Println("Value of x:", value) // output value of x
+// 	// } else {
+// 	// 	fmt.Println("Variable not found")
+// 	// }
+// 	// global.Set("x", 20)
 
-// 	value, found := global.Get("x")
-// 	if found {
-// 		fmt.Println("Value of x:", value) // output value of x
-// 	} else {
-// 		fmt.Println("Variable not found")
-// 	}
-// 	global.Set("x",20)
+// 	// value, found = global.Get("x")
+// 	// if found {
+// 	// 	fmt.Println("Value of x:", value) // output value of x
+// 	// } else {
+// 	// 	fmt.Println("Variable not found")
+// 	// }
+// 	// global.Remove("x")
+// 	// value, found = global.Get("x")
+// 	// if found {
+// 	// 	fmt.Println("Value of x:", value) // output value of x
+// 	// } else {
+// 	// 	fmt.Println("Variable not found")
+// 	// }
 
-// 	value, found = global.Get("x")
-// 	if found {
-// 		fmt.Println("Value of x:", value) // output value of x
-// 	} else {
-// 		fmt.Println("Variable not found")
-// 	}
-// 	global.Remove("x")
-// 	value, found = global.Get("x")
-// 	if found {
-// 		fmt.Println("Value of x:", value) // output value of x
-// 	} else {
-// 		fmt.Println("Variable not found")
-// 	}
+// 	// the next thing is function call.go.
+// 	// objects.go is used to define our data structure and how they behave
+// 	// for example to define that "an interger can not be added to an string directly"
+// 	// x=5
+// 	// x+5
+// 	// x=10
+// 	// Call the function
+// 	exampleFunc(5, 15, child)
 
-// the next thing is function call.go.
-// objects.go is used to define our data structure and how they behave
-// for example to define that "an interger can not be added to an string directly"
-// x=5
-// x+5
-// x=10
+// 	resultValue, foundResult := global.Get("result")
+// 	if foundResult {
+// 		fmt.Println("Result:", resultValue) // Output: Result: 20
+// 	}
+// }
+
+// func exampleFunc(a int, b int, scope *SymbolTable) int {
+// 	sum := a + b
+// 	scope.Set("result", sum) // Store the result in child scope
+// 	return sum
 // }
