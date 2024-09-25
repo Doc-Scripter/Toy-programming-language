@@ -4,7 +4,7 @@ import "ksm/token"
 
 /*A parser is a software component that takes input data (frequently text) and builds
 a data structure – often some kind of parse tree, abstract syntax tree or other
-hierarchical structure – giving a structural representation of the input, checking or
+hierarchical structure – giving a structural representation of the input, checking for
 correct syntax in the process. */
 
 // common interface for all AST nodes.
@@ -78,3 +78,10 @@ type AssignmentStatement struct {
 func (ls *VarStatement) statementNode()       {}
 func (ls *VarStatement) TokenLiteral() string { return ls.Token.Literal }
 
+type ReturnStatment struct {
+	Token       token.Token
+	ReturnValue Expression
+}
+
+func (rs *ReturnStatment) statementNode()       {}
+func (rs *ReturnStatment) TokenLiteral() string { return rs.Token.Literal }
