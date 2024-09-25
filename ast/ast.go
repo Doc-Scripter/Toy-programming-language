@@ -20,7 +20,7 @@ type Program struct {
 // interface representing a statement
 type Statement interface {
 	Node
-	StatementNode()
+	statementNode()
 }
 
 func (p *Program) TokenLiteral() string {
@@ -33,14 +33,14 @@ func (p *Program) TokenLiteral() string {
 
 // represents a variable declaration(let x = 5)
 type VarStatement struct {
-	Token token.Token // The token.LET token
+	Token token.Token // The token.VAR token
 	Name  *Identifier
 	Value Expression
 }
 
 // represents variable names
 type Identifier struct {
-	Token token.Token // The token.IDENT token
+	Token token.Token // The token.IDENTIFIER token
 	Value string
 }
 
