@@ -2,6 +2,7 @@ package evaluator
 
 import (
 	"fmt"
+
 	"ksm/ast"
 	"ksm/environment"
 )
@@ -10,7 +11,7 @@ func Eval(node ast.Node, env *environment.SymbolTable) interface{} {
 	switch node := node.(type) {
 	case *ast.Program:
 		return evalProgram(node, env)
-	case *ast.LetStatement:
+	case *ast.VarStatement:
 		return evalLetStatement(node, env)
 	case *ast.Identifier:
 		return evalIdentifier(node, env)
@@ -33,7 +34,7 @@ func evalProgram(program *ast.Program, env *environment.SymbolTable) interface{}
 	return result
 }
 
-func evalLetStatement(node *ast.LetStatement, env *environment.SymbolTable) interface{} {
+func evalLetStatement(node *ast.VarStatement, env *environment.SymbolTable) interface{} {
 	value := Eval(node.Value, env)
 	env.Set(node.Name.Value, value)
 	return value
