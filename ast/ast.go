@@ -43,14 +43,6 @@ func (vs *VarStatement) StatementNode() {
 	panic("unimplemented")
 }
 
-func (vs *VarStatement) statementNode() {}
-func (vs *VarStatement) TokenLiteral() string {
-	if vs.Token.Literal == "" {
-		return "nil"
-	}
-	return vs.Token.Literal
-}
-
 // represents variable names
 type Identifier struct {
 	Token token.Token // The token.IDENTIFIER token
