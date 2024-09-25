@@ -20,7 +20,7 @@ type Program struct {
 // interface representing a statement
 type Statement interface {
 	Node
-	StatementNode()
+	statementNode()
 }
 
 func (p *Program) TokenLiteral() string {
@@ -38,10 +38,14 @@ type VarStatement struct {
 	Value Expression
 }
 
-// StatementNode implements Statement.
-func (vs *VarStatement) StatementNode() {
-	panic("unimplemented")
-}
+func (vs *VarStatement) statementNode()       {}
+func (vs *VarStatement) TokenLiteral() string { return vs.Token.Literal }
+
+
+// // StatementNode implements Statement.
+// func (vs *VarStatement) StatementNode() {
+// 	panic("unimplemented")
+// }
 
 // represents variable names
 type Identifier struct {
@@ -114,13 +118,11 @@ type AssignmentStatement struct {
 	Value Expression
 }
 
-func (ls *VarStatement) statementNode()       {}
-func (ls *VarStatement) TokenLiteral() string { return ls.Token.Literal }
 
-type ReturnStatment struct {
+type ReturnStatement struct {
 	Token       token.Token
 	ReturnValue Expression
 }
 
-func (rs *ReturnStatment) statementNode()       {}
-func (rs *ReturnStatment) TokenLiteral() string { return rs.Token.Literal }
+func (rs *ReturnStatement) statementNode()       {}
+func (rs *ReturnStatement) TokenLiteral() string { return rs.Token.Literal }
