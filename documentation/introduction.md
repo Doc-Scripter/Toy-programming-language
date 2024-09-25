@@ -1,13 +1,12 @@
 # Project Progress Journal
 
-Here's a brief overview of what's in the code so far
+Overview of Ksm
 
-## Features of Ksm
-1. **Ksm language Design:**Ksm, with a sintax inspired by Go, currently focuse on setting up its fundamental  building block: `tokenization(lexer)`, `parsing(AST)`, and `token definations`
+Ksm is an interpreted toy programming language written in Go. The design draws inspiration from Go's syntax, and the project is currently focused on setting up fundamental building blocks like tokenization (lexer), parsing (AST), and token definitions.
 
 ## File Structure:
 ### Abstract Syntax Tree(AST)
-+ **Purpose:** The code defines the basic structure ofr representing the Abstract Syntax Tree (AST) in Ksm. ASTs represent the structure of the course code in a tree form and help break dwn the code for interpration or compilation.
++ **Purpose:** The code defines the basic structure of representing the Abstract Syntax Tree (AST) in Ksm. ASTs represent the structure of the course code in a tree form and help break down the code for interpration or compilation.
 
 + **Key Componensts:**
     + **Node Interface:** Provides a `TokenLiteral()` method, which every AST node implements to return the literal value of the token.
@@ -15,8 +14,8 @@ Here's a brief overview of what's in the code so far
     + **LetStatement Struct:** Represents a variable declareation (e.g., `let x = 5;`), containing the token for `let`, a variable name (`Identifier`), and its value (`Expression`).
     + **Expression Interface:** Represents any expression in the language, including integer literals (`IntegerLiteral`).
 
-    ### Lexer
-+ **Purpose:** Converts the stream of tokens produced by the lexer into an Abstract Syntax Tree (AST), which can  then be interpreted or compiled.
+ ### Lexer
++ **Purpose:** Converts the input source code into a stream of tokens that will be processed into an Abstract Syntax Tree (AST).
 
 + **Key Components:**
     + **Lexer Struct:** Manages the input source code, tracks positions, and handles the current character (`ch`).
@@ -25,19 +24,17 @@ Here's a brief overview of what's in the code so far
     + **peekChar Method**: Peeks at the next character without advancing the read position.
     + **skipWhiteSpace Method:** Skips over whitespce (spaces, tabs, newlines).
 
-
-    ### Token
- + **Purpose:** Defines the sructure of a token and the types of the tokens available in Ksm.
+### Token
+ + **Purpose:** Defines the structure of a token and the types of the tokens available in Ksm.
  + **Key Components:**
-        + **Token Struct:** Represents a token with its type and literal value.
-        + **Token Types :** Predefined constants for various types of tokens like `ILLEGAL`,
-        `EOF`, `IDENTIFIER`,`NUMBER`, `ASSIGN`, `PLUS`, `EQ`, `LT`, `GT`, etc.
+    + **Token Struct:** Represents a token with its type and literal value.
+    + **Token Types :** Predefined constants for various types of tokens like `ILLEGAL`,`EOF`, `IDENTIFIER`,`NUMBER`, `ASSIGN`, `PLUS`, `EQ`, `LT`, `GT`, etc.
         + **KeywordsMap:** Maps keywords (e.g., `func`, `var`, `if`) to their respective token types.
 
     ### Main Function
  + **Purpose:** Demonstrates the creation of the a lexer instance and token scanning.
  + **Key Components:** 
-        + **main Function:** Inializes the lexer witha simple input (`"Hello"`) and prints out the the lexer instance for inspection.
+    + **main Function:** Inializes the lexer witha simple input (`"Hello"`) and prints out the the lexer instance for inspection.
 
     ### Parser (Work in Progress)
 + **Purpose:** Converts the stream of tokens produced by the lexer into an Abstract Syntax  Tree(AST), which can then be interpreted or compiled.
@@ -50,12 +47,21 @@ Here's a brief overview of what's in the code so far
 ## Next Steps:
 1. **Parser Enhancement:**
     + Implementation of parsing logic for expressions(arithmetic, comparison, etc.) and statements (like variable declarations, assignments).
-    + Start with simple statements like `var` declations and gradually adding support for functions, conditionals(`id/else`), loops(`for`) etc.
+    + Starting with simple statements like `var` declations and gradually adding support for functions, conditionals(`id/else`), loops(`for`) etc.
 2. **Interpreter or Code Generation:**
-    + Once parsing is complete, will create an interpreter to evaluate the AST or a code generator to compile it to bytecode or the go language.
+    + Once parsing is complete, we will create an interpreter to evaluate the AST or a code generator to compile it to bytecode or Go code
 3. **Data Structrue Implementation:**
-    + Flesh out the details for the `array`, `struct`, and `hash` data structures. You'll need methods to manipulate them, such as adding/ removing elements, accessing members, etc.
+    + Flesh out the details for the `array`, `struct`, and `hash` data structures. We'll need methods to manipulate them, such as adding/ removing elements, accessing members, etc.
 4. **Expand Tests:**
     + Testing different cases(valid and invalid code) will help in catching issues early, 
-    + We already have lexer tests.
+    + Lexer tests are already in place.
 
+## Usefull Blogs and books
++ [pratt Parsing - .Dev](https://dev.to/jrop/pratt-parsing)
+
++ [pratt Parsing - matklad](https://matklad.github.io/2020/04/13/simple-but-powerful-pratt-parsing.html)
+
++ [pratt Parsing - chidi williams](https://chidiwilliams.com/posts/on-recursive-descent-and-pratt-parsing)
+
+
+Click [here](../README.md#documnentation) to naviagate back to the [homepage](../README.md#documnentation)

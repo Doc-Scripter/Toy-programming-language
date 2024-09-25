@@ -2,9 +2,9 @@ package ast
 
 import "ksm/token"
 
-/*A parser is a sotware component that takes input data (requently text) and builds
-a data structure – oten some kind o parse tree, abstract syntax tree or other
-hierarchical structure – giving a structural representation o the input, checking or
+/*A parser is a software component that takes input data (frequently text) and builds
+a data structure – often some kind of parse tree, abstract syntax tree or other
+hierarchical structure – giving a structural representation of the input, checking or
 correct syntax in the process. */
 
 // common interface for all AST nodes.
@@ -31,7 +31,13 @@ func (p *Program) TokenLiteral() string {
 	}
 }
 
-// represents a variable declaration(let x = 5)
+// is an interface for all expressions
+type Expression interface {
+	Node
+	expressionNode()
+}
+
+// represents a variable declaration(var x = 5)
 type VarStatement struct {
 	Token token.Token // The token.VAR token
 	Name  *Identifier
@@ -44,10 +50,12 @@ type Identifier struct {
 	Value string
 }
 
-// is an interface for all expressions
-type Expression interface {
-	Node
-	ExpressionNode()
+func (i *Identifier) expressionNode() {}
+func (i *Identifier) TokenLiteral() string {
+	if i.Token.Literal == "" {
+		return "nil"
+	}
+	return i.Token.Literal
 }
 
 // represents interger values

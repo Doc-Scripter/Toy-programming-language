@@ -26,11 +26,13 @@ func New(l *lexer.Lexer) *Parser {
 	return p
 }
 
+// (p *Parser)nextToken() advances both curToken and peekToken
 func (p *Parser) nextToken() {
 	p.curToken = p.peekToken
 	p.peekToken = p.l.NextToken()
 }
 
+// (p *Parser)ParseProgram() constructs the root node of the AST, an `*ast.Program`.  
 func (p *Parser) ParseProgram() *ast.Program {
 	program := &ast.Program{}
 	program.Statements = []ast.Statement{}
@@ -46,6 +48,7 @@ func (p *Parser) ParseProgram() *ast.Program {
 	return program
 }
 
+// () parseStatement () parses a statement
 func (p *Parser) parseStatement() ast.Statement {
 	switch p.curToken.Type {
 	case token.VAR:
