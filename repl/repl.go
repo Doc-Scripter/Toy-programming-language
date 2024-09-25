@@ -4,9 +4,11 @@ import (
 	"bufio"
 	"fmt"
 	"io"
+	"os"
 
+	"ksm/ast"
 	"ksm/lexer"
-	"ksm/token"
+	"ksm/parser"
 )
 
 const REPL_PROMPT = "\033[32mEnter Input:\033[0m "
@@ -25,10 +27,42 @@ func StartRepl(input io.Reader, output io.Writer) {
 		line := scanner.Text()
 
 		L := lexer.New(line)
+		p := parser.New(L)
 
-		for tok := L.NextToken(); tok.Type != token.EOF; tok = L.NextToken() {
-			fmt.Printf("%+v\n", tok)
+		program := p.ParseProgram()
+		checkParserErrors(p)
+
+		for _, stmt := range program.Statements {
+			fmt.Println(formatStatement(stmt))
 		}
 		fmt.Println()
+	}
+}
+
+func checkParserErrors(p *parser.Parser) {
+	errors := p.Errors()
+
+	if len(errors) == 0 {
+		return
+	}
+
+	fmt.Printf("\033[31mparser has %d errors\033[0m\n", len(errors))
+	for _, msg := range errors {
+		fmt.Printf("\033[31mparser error: %q\033[0m\n", msg)
+	}
+	os.Exit(1)
+}
+
+func formatStatement(stmt ast.Statement) string {
+	// If stmt is a known type like VarStement or ReturnStatement, formats accordingly
+	switch stmt := stmt.(type) {
+	case *ast.VarStatement:
+		return fmt.Sprintf("\033[34mVar Statement - Name:\033[0m %s, \033[34mvalue:\033[0m %d", stmt.Name.Value, stmt.Value)
+	// case *ast.AssignmentStatement:
+	// 	return fmt.Sprintf("Assignment Statement - Name: %s, Value: %v", stmt.Name.Value, stmt.Value)
+	// case *ast.ReturnStatment:
+	// 	return fmt.Sprintf("Return Statement - Value: %v", stmt.ReturnValue)
+	default:
+		return fmt.Sprintf("Unkown Statement Type: %T", stmt)
 	}
 }

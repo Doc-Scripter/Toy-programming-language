@@ -2,9 +2,9 @@ package ast
 
 import "ksm/token"
 
-/*A parser is a sotware component that takes input data (requently text) and builds
-a data structure – oten some kind o parse tree, abstract syntax tree or other
-hierarchical structure – giving a structural representation o the input, checking or
+/*A parser is a software component that takes input data (frequently text) and builds
+a data structure – often some kind of parse tree, abstract syntax tree or other
+hierarchical structure – giving a structural representation of the input, checking for
 correct syntax in the process. */
 
 // common interface for all AST nodes.
@@ -20,7 +20,7 @@ type Program struct {
 // interface representing a statement
 type Statement interface {
 	Node
-	StatementNode()
+	statementNode()
 }
 
 func (p *Program) TokenLiteral() string {
@@ -38,22 +38,18 @@ type VarStatement struct {
 	Value Expression
 }
 
-// StatementNode implements Statement.
-func (vs *VarStatement) StatementNode() {
-	panic("unimplemented")
-}
+func (vs *VarStatement) statementNode()       {}
+func (vs *VarStatement) TokenLiteral() string { return vs.Token.Literal }
 
-func (vs *VarStatement) statementNode() {}
-func (vs *VarStatement) TokenLiteral() string {
-	if vs.Token.Literal == "" {
-		return "nil"
-	}
-	return vs.Token.Literal
-}
+
+// // StatementNode implements Statement.
+// func (vs *VarStatement) StatementNode() {
+// 	panic("unimplemented")
+// }
 
 // represents variable names
 type Identifier struct {
-	Token token.Token // The token.IDENT token
+	Token token.Token // The token.IDENTIFIER token
 	Value string
 }
 
@@ -121,3 +117,12 @@ type AssignmentStatement struct {
 	Name  string
 	Value Expression
 }
+
+
+type ReturnStatement struct {
+	Token       token.Token
+	ReturnValue Expression
+}
+
+func (rs *ReturnStatement) statementNode()       {}
+func (rs *ReturnStatement) TokenLiteral() string { return rs.Token.Literal }
