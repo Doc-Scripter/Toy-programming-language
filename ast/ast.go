@@ -32,7 +32,7 @@ func (p *Program) TokenLiteral() string {
 }
 
 // represents a variable declaration(let x = 5)
-type LetStatement struct {
+type VarStatement struct {
 	Token token.Token // The token.LET token
 	Name  *Identifier
 	Value Expression
@@ -67,5 +67,5 @@ type AssignmentStatement struct {
 	Value Expression
 }
 
-func (ls *LetStatement) statementNode()       {}
-func (ls *LetStatement) TokenLiteral() string { return ls.Token.Literal }
+func (ls *VarStatement) statementNode()       {}
+func (ls *VarStatement) TokenLiteral() string { return ls.Token.Literal }
