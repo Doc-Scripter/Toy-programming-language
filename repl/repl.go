@@ -6,6 +6,7 @@ import (
 	"io"
 	"os"
 
+	"ksm/ast"
 	"ksm/lexer"
 	"ksm/parser"
 )
@@ -31,8 +32,8 @@ func StartRepl(input io.Reader, output io.Writer) {
 		program := p.ParseProgram()
 		checkParserErrors(p)
 
-		for _, brnch := range program.Statements {
-			fmt.Printf("%+++v\n", brnch)
+		for _, stmt := range program.Statements {
+			fmt.Println(formatStatement(stmt))
 		}
 		fmt.Println()
 	}
@@ -45,9 +46,23 @@ func checkParserErrors(p *parser.Parser) {
 		return
 	}
 
-	fmt.Printf("parser has %d errors", len(errors))
+	fmt.Printf("\033[31mparser has %d errors\033[0m\n", len(errors))
 	for _, msg := range errors {
-		fmt.Printf("parser error: %q", msg)
+		fmt.Printf("\033[31mparser error: %q\033[0m\n", msg)
 	}
 	os.Exit(1)
+}
+
+func formatStatement(stmt ast.Statement) string {
+	// If stmt is a known type like VarStement or ReturnStatement, formats accordingly
+	switch stmt := stmt.(type) {
+	case *ast.VarStatement:
+		return fmt.Sprintf("Var Statement - Name: %s, value: %v", stmt.Name.Value, stmt.Value)
+	case *ast.AssignmentStatement:
+		return fmt.Sprintf("Assignment Statement - Name: %s, Value: %v", stmt.Name.Value, stmt.Value)
+	case *ast.ReturnStatment:
+		return fmt.Sprintf("Return Statement - Value: %v", stmt.ReturnValue)
+	default:
+		return fmt.Sprintf("Unkown Statement Type: %T", stmt)
+	}
 }
