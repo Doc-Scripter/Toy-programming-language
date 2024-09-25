@@ -65,7 +65,7 @@ func formatStatement(stmt ast.Statement) string {
 		return fmt.Sprintf("\033[34mVarStatement - Indentifier/Name :\033[0m %s, \033[34mvalue:\033[0m %s", stmt.Name.Value, formatExpression(stmt.Value))
 	// case *ast.AssignmentStatement:
 	// 	return fmt.Sprintf("Assignment Statement - Name: %s, Value: %v", stmt.Name.Value, stmt.Value)
-	case *ast.ReturnStatment:
+	case *ast.ReturnStatement:
 		return fmt.Sprintf("Return Statement - Value: %v", stmt.ReturnValue)
 	default:
 		return fmt.Sprintf("Unkown Statement Type: %T", stmt)
