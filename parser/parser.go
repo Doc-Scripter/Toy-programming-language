@@ -84,9 +84,16 @@ func (p *Parser) parseVarStatement() *ast.VarStatement {
 		return nil
 	}
 
+	p.nextToken()
+
 	// TODO: We're skipping the expressions until we encounter a semicolon
 	for !p.curTokenIs(token.SEMICOLON) {
+		if p.curTokenIs(token.EOF) {
+			p.errors = append(p.errors, "missing ';' at end of statement")
+			return nil
+		}
 		p.nextToken()
+
 	}
 	return stmt
 }
@@ -98,7 +105,12 @@ func (p *Parser) parseReturnStatement() *ast.ReturnStatement {
 
 	// TODO: We're skipping the expression until we encounter a semicolon
 	for !p.curTokenIs(token.SEMICOLON) {
-		p.nextToken()
+		if p.curTokenIs(token.EOF) {
+			p.errors = append(p.errors, "missing ';' at end of statement")
+			return nil
+		} else {
+			p.nextToken()
+		}
 	}
 	return stmt
 }
