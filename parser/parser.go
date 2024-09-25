@@ -2,6 +2,7 @@ package parser
 
 import (
 	"fmt"
+
 	"ksm/ast"
 	"ksm/lexer"
 	"ksm/token"
@@ -42,13 +43,13 @@ func (p *Parser) nextToken() {
 	p.peekToken = p.l.NextToken()
 }
 
-// (p *Parser)ParseProgram() constructs the root node of the AST, an `*ast.Program`.  
+// (p *Parser)ParseProgram() constructs the root node of the AST, an `*ast.Program`.
 func (p *Parser) ParseProgram() *ast.Program {
 	program := &ast.Program{}
 	program.Statements = []ast.Statement{}
 
 	for p.curToken.Type != token.EOF {
-		stmt := p.parseVarStatement()
+		stmt := p.parseStatement()
 		if stmt != nil {
 			program.Statements = append(program.Statements, stmt)
 		}
@@ -58,16 +59,17 @@ func (p *Parser) ParseProgram() *ast.Program {
 	return program
 }
 
-func (p *Parser) parseStatement() *ast.Statement {
+func (p *Parser) parseStatement() ast.Statement {
 	switch p.curToken.Type {
 	case token.VAR:
-		return p.parseStatement()
+		return p.parseVarStatement()
+	case token.RETURN:
+		return p.parseReturnStatement()
 	default:
 		return nil
 	}
 }
 
-// 
 // () parseStatement () parses a statement
 func (p *Parser) parseVarStatement() *ast.VarStatement {
 	stmt := &ast.VarStatement{Token: p.curToken}
@@ -89,7 +91,19 @@ func (p *Parser) parseVarStatement() *ast.VarStatement {
 	return stmt
 }
 
-func (p *Parser) curTokenIs(t token.TokenType) bool{
+func (p *Parser) parseReturnStatement() *ast.ReturnStatement {
+	stmt := &ast.ReturnStatement{Token: p.curToken}
+
+	p.nextToken()
+
+	// TODO: We're skipping the expression until we encounter a semicolon
+	for !p.curTokenIs(token.SEMICOLON) {
+		p.nextToken()
+	}
+	return stmt
+}
+
+func (p *Parser) curTokenIs(t token.TokenType) bool {
 	return p.curToken.Type == t
 }
 
