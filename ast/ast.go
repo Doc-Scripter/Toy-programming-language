@@ -77,3 +77,4 @@ type AssignmentStatement struct {
 
 func (ls *VarStatement) statementNode()       {}
 func (ls *VarStatement) TokenLiteral() string { return ls.Token.Literal }
+
